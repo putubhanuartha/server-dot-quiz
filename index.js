@@ -10,7 +10,7 @@ const app = express();
 app.use(
 	cors({
 		credentials: true,
-		origin: [process.env.CLIENT_ORIGIN_URL, "http://localhost:3000"],
+		origin: [process.env.CLIENT_ORIGIN_URL, process.env.CLIENT_ORIGIN_URL_NEXT],
 	})
 );
 app.use(express.json());
@@ -19,7 +19,6 @@ app.use(cookieParser());
 
 // router middleware
 app.use(Router);
-
 
 db.authenticate()
 	.then(async () => {
