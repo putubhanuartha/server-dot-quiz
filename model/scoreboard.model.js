@@ -20,6 +20,10 @@ const ScoreBoardModel = db.define(
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
+		data_question_review: {
+			type: DataTypes.TEXT,
+			allowNull: false,
+		},
 	},
 	{ freezeTableName: true }
 );
