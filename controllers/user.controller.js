@@ -73,7 +73,7 @@ export const getUserScoreboard = async (req, res) => {
 	}
 };
 export const postUserScoreboard = async (req, res) => {
-	const { score, wrong_answer, not_answered } = req.body;
+	const { score, wrong_answer, not_answered, data_question_review } = req.body;
 	const { uid } = res.locals.data;
 	try {
 		await ScoreBoardModel.create({
@@ -81,12 +81,29 @@ export const postUserScoreboard = async (req, res) => {
 			wrong_answer,
 			userId: uid,
 			not_answered,
+			data_question_review,
 		});
 		res
 			.status(200)
 			.json({ message: "score successfully added to user scoreboard" });
 	} catch (err) {
 		console.log(err);
+		res.sendStatus(500);
+	}
+};
+export const getUserPostScore = async (req, res) => {
+	const { id } = req.params;
+	const { uid } = res.locals.data;
+	try {
+		const data = await ScoreBoardModel.findOne({
+			where: { id },
+			include: [{ model: UserModel, where: { id: uid } }],
+			attributes: ["id", "data_question_review"],
+		});
+		if (data) return res.status(200).json(data);
+		res.status(404).json({ message: "data not found" });
+	} catch (err) {
+		console.err(err);
 		res.sendStatus(500);
 	}
 };

@@ -7,7 +7,12 @@ import cookieParser from "cookie-parser";
 const port = process.env.PORT || 3000;
 dotenv.config();
 const app = express();
-app.use(cors({ credentials: true, origin: [process.env.CLIENT_ORIGIN_URL] }));
+app.use(
+	cors({
+		credentials: true,
+		origin: [process.env.CLIENT_ORIGIN_URL, process.env.CLIENT_ORIGIN_URL_NEXT],
+	})
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

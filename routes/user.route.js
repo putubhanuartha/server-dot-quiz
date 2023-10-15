@@ -1,6 +1,7 @@
 import express from "express";
 
 import {
+	getUserPostScore,
 	logoutUser,
 	postUserScoreboard,
 	registerUser,
@@ -20,4 +21,10 @@ Router.get("/user/auth", verifyToken, authorizeUser, (req, res) => {
 
 Router.get("/user/scoreboard", verifyToken, authorizeUser, getUserScoreboard);
 Router.post("/user/score", verifyToken, authorizeUser, postUserScoreboard);
+Router.get(
+	"/user/scoreboard/review/:id",
+	verifyToken,
+	authorizeUser,
+	getUserPostScore
+);
 export default Router;
