@@ -4,7 +4,7 @@ import Router from "./routes/user.route.js";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 dotenv.config();
 const app = express();
 app.use(
